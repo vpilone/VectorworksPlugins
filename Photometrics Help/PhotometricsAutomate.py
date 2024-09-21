@@ -17,6 +17,15 @@ def _SetupPhotometrics(line):
         upperPt = pt1
         upperPt.y += 6
         vs.LineTo(upperPt)
+        vs.MoveTo(upperPt)
+        vs.LineTo(pt2)
+        drawnLine1 = vs.LNewObj()
+        if pt1.x == vs.GetSegPt1(line).x:
+            vs.MoveTo(vs.GetSegPt2(line))
+        else:
+            vs.MoveTo(vs.GetSegPt1(line))
+        vs.LineTo(pt2)
+        drawnLine2 = vs.LNewObj()
 
     vs.SetSelect(line)
     vs.GetLine(_DrawPhotometrics)
@@ -24,6 +33,3 @@ def _SetupPhotometrics(line):
 
 _setVariables()
 vs.ForEachObject(_SetupPhotometrics, ("(SEL = True)"))
-
-
-# vs.ForEachObject(channelLights, ("(SEL = True) & (PON = 'Lighting Device')"))
